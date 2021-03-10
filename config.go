@@ -1,33 +1,27 @@
 package main
 
 import (
-	"encoding/json"
+	"github.com/BurntSushi/toml"
 	"log"
-	"os"
 )
 
 type config struct {
-	LastUpdatedTimestamp int64  `json:"last_updated_timestamp"`
-	Price                int    `json:"price"`
-	ClientID             string `json:"ClientID"`
-	ClientSecret         string `json:"ClientSecret"`
-	ServerHost           string `json:"ServerHost"`
-	ServerPort           string `json:"ServerPort"`
-	PgHost               string `json:"PgHost"`
-	PgPort               string `json:"PgPort"`
-	PgUser               string `json:"PgUser"`
-	PgPass               string `json:"PgPass"`
-	PgBase               string `json:"PgBase"`
+	ClientID     string
+	ClientSecret string
+	ServerHost   string
+	ServerPort   string
+	PgHost       string
+	PgPort       string
+	PgUser       string
+	PgPass       string
+	PgBase       string
 }
 
 var cfg config
 
 func init() {
-	file, err := os.Open("config.json")
-	if err != nil {
+	if _, err := toml.DecodeFile("config.toml", &cfg); err != nil {
 		log.Fatal(err)
-		panic("Не удалось открыть файл")
 	}
-	defer file.Close()
-	json.NewDecoder(file).Decode(&cfg)
+
 }

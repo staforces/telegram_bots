@@ -1,7 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"time"
+)
 
 func main() {
-	fmt.Println(cfg)
+	wowapi()
+	dt := time.Now()
+	cd := dt.Format("02-01-2006")
+
 }
