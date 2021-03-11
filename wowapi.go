@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"golang.org/x/oauth2/clientcredentials"
 	"log"
 )
@@ -12,7 +13,7 @@ type TokenPrice struct {
 	Price                int   `json:"price"`
 }
 
-var tprices int
+var tprices string
 
 func wowapi() {
 	TPrice := TokenPrice{}
@@ -29,8 +30,8 @@ func wowapi() {
 	}
 	defer resp.Body.Close()
 	json.NewDecoder(resp.Body).Decode(&TPrice)
-	tprices = TPrice.Price / 10000
-	err = insertdb(tprices)
+	tprices = fmt.Sprintf("%d голдЫ", TPrice.Price/10000)
+	err = insertdb()
 	if err != nil {
 		log.Fatal(err)
 	}

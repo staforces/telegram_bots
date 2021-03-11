@@ -6,15 +6,17 @@ import (
 )
 
 type config struct {
-	ClientID     string
-	ClientSecret string
-	ServerHost   string
-	ServerPort   string
-	PgHost       string
-	PgPort       string
-	PgUser       string
-	PgPass       string
-	PgBase       string
+	ExchangeID    string
+	ClientID      string
+	ClientSecret  string
+	ServerHost    string
+	ServerPort    string
+	PgHost        string
+	PgPort        string
+	PgUser        string
+	PgPass        string
+	PgBase        string
+	TelegramToken string
 }
 
 var cfg config
